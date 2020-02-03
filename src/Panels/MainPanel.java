@@ -23,12 +23,16 @@ public class MainPanel extends TrackablePanel {
     BounceBallImage bounceBallImage = new BounceBallImage();
 
     public MainPanel(){
-
-
         backgroundLayer.add(new SolidColorBackground(new Color(233, 233, 255)));
+        groundTileLayer.add(new Tile(900, 0));
         groundTileLayer.add(new Tile(900, 150));
+        groundTileLayer.add(new Tile(1050, 0));
         groundTileLayer.add(new Tile(1050, 150));
         groundTileLayer.add(new Tile(1050, 300));
+        groundTileLayer.add(new Tile(1050, 450));
+        groundTileLayer.add(new Tile(1200, 0));
+        groundTileLayer.add(new Tile(1200, 150));
+        groundTileLayer.add(new Tile(1200, 300));
 
         bounceBallImage.setCollisionLayer(groundTileLayer);
         bounceBallLayer.add(bounceBallImage);
@@ -36,7 +40,7 @@ public class MainPanel extends TrackablePanel {
         CButton playSingleButton = new CButton(0, 200, ImageEngine.MAIN_MENU_BOX_IMAGE, "Single Play");
         CButton playMultiButton = new CButton(0, 320, ImageEngine.MAIN_MENU_BOX_IMAGE, "MultiPlay");
         CButton makeCustomMapButton = new CButton(0, 440, ImageEngine.MAIN_MENU_BOX_IMAGE, "Map Editor");
-        makeCustomMapButton.setClickListener(() -> System.out.println("asdf"));
+        makeCustomMapButton.setClickListener(() -> Function.movePanel(new MakeMapPanel()));
 
         buttonLayer.add(playSingleButton);
         buttonLayer.add(playMultiButton);
@@ -56,6 +60,11 @@ public class MainPanel extends TrackablePanel {
         buttonLayer.draw(g);
 
         g.setColor(Color.BLACK);
+
+        Function.setFontSize(g, 75f);
+        g.drawString("Bounce Ball", 100, 100);
+        Function.setFontSize(g, 25f);
+        g.drawString(Constant.VERSION, 800, 720);
     }
 
     private void addButton(CButton btn){

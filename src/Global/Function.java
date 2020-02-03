@@ -2,6 +2,7 @@ package Global;
 
 import Core.GameStarter;
 import Managers.FontManager;
+import ObjectUtil.TrackablePanel;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;
@@ -9,8 +10,16 @@ import java.awt.font.GlyphVector;
 import java.awt.image.BufferedImage;
 
 public class Function {
+    public static void setFontSize(Graphics2D g, float size){
+        g.setFont(FontManager.getFont(size));
+    }
+
     public static void playSound(int key){
         GameStarter.soundManager.playSoundTrack(key);
+    }
+
+    public static void movePanel(TrackablePanel tpanel){
+        GameStarter.frameManager.movePanel(tpanel);
     }
 
     public static Point convertToInteger(double x, double y){

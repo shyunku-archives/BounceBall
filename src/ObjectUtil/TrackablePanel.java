@@ -20,7 +20,6 @@ public class TrackablePanel extends JPanel {
         this.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                Variables.mousePos = e.getPoint();
             }
 
             @Override

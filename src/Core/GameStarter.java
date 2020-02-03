@@ -1,6 +1,6 @@
 package Core;
 
-import Engine.ImageEngine;
+import Managers.ImageManager;
 import Managers.FontManager;
 import Managers.FrameManager;
 import Managers.SoundManager;
@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class GameStarter {
-    public static ImageEngine imageEngine = new ImageEngine();
+    public static ImageManager imageManager = new ImageManager();
     public static FrameManager frameManager;
     public static SoundManager soundManager;
 

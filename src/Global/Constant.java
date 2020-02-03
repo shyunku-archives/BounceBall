@@ -3,7 +3,7 @@ package Global;
 import java.awt.*;
 
 public class Constant {
-    public static final String VERSION = "0.2v";
+    public static final String VERSION = "0.2.1v";
 
     //DISPLAY
     public static final Dimension RESOLUTION = new Dimension(1360, 765);
@@ -14,4 +14,5 @@ public class Constant {
     public static final int MAP_TILE_MAX_ROW = 60;
     public static final int MAP_TILE_MAX_COL = 130;
 
+    public static final Color LOG_TEXT_COLOR = new Color(20, 70, 20);
 }

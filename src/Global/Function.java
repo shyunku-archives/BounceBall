@@ -10,6 +10,19 @@ import java.awt.font.GlyphVector;
 import java.awt.image.BufferedImage;
 
 public class Function {
+    public static void drawImage(Graphics2D g, int key, int x, int y){
+        g.drawImage(getImage(key), null, x, y);
+    }
+
+    public static String getPairStr(double d1, double d2){
+        return String.format("(%.3f,%.3f)", d1, d2);
+    }
+    public static String getPairStr(int i1, int i2){
+        return String.format("(%d,%d)", i1, i2);
+    }
+    public static int getGeneralLogSize(){
+        return GameStarter.frameManager.logPanel.getLogSize();
+    }
     public static void setFontSize(Graphics2D g, float size){
         g.setFont(FontManager.getFont(size));
     }
@@ -27,7 +40,7 @@ public class Function {
     }
 
     public static BufferedImage getImage(int key){
-        return GameStarter.imageEngine.getImage(key);
+        return GameStarter.imageManager.getImage(key);
     }
 
     public static Point getConvertedPosition(double x, double y){

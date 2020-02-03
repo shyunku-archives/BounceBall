@@ -1,12 +1,12 @@
 package Panels;
 
+import Managers.ImageManager;
 import Global.Constant;
+import Global.Function;
 import Global.Variables;
 import Managers.FontManager;
 import ObjectUtil.TrackablePanel;
-import com.sun.scenario.effect.Offset;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -15,10 +15,17 @@ public class MakeMapPanel extends TrackablePanel {
     private final int minXOffset = 50;
     private final int minYOffset = 50;
 
-    private final int gridSize = 40;
+    private final int COORDINATE_ADJUST_OFFSET_X = 17;
+    private final int COORDINATE_ADJUST_OFFSET_Y = 8;
+
+    private final int GRID_SIZE = 40;
 
     private int cameraX = 0;
     private int cameraY = 0;
+
+    private int mouseCoordX = 0;
+    private int mouseCoordY = 0;
+
 
     @Override
     protected void paintComponent(Graphics gd) {
@@ -26,22 +33,36 @@ public class MakeMapPanel extends TrackablePanel {
         Graphics2D g = (Graphics2D) gd;
         FontManager.smoothRendering(g);
 
+        g.setColor(new Color(202, 202, 202));
+        //y-axis
+        int yAxisCoord = COORDINATE_ADJUST_OFFSET_X*GRID_SIZE + cameraX;
+        g.fillRect(yAxisCoord, 0, GRID_SIZE, Constant.RESOLUTION.height);
+
+        //y-axis
+        int xAxisCoord = COORDINATE_ADJUST_OFFSET_Y*GRID_SIZE + cameraY;
+        g.fillRect(0, xAxisCoord, Constant.RESOLUTION.width, GRID_SIZE);
+
         g.setColor(Color.BLACK);
         //y-axis parallel grid line
         for(int i=-1;;i++){
-            int x = gridSize*i + cameraX%gridSize;
+            int x = GRID_SIZE *i + cameraX% GRID_SIZE;
             if(x > Constant.RESOLUTION.width) break;
             g.drawLine(x, 0, x, Constant.RESOLUTION.height);
         }
 
         //x-axis parallel grid line
         for(int i=-1;;i++){
-            int y = gridSize*i + cameraY%gridSize;
+            int y = GRID_SIZE *i + cameraY% GRID_SIZE;
             if(y > Constant.RESOLUTION.height) break;
             g.drawLine(0, y, Constant.RESOLUTION.width, y);
         }
 
-        g.setColor(Color.RED);
+        Function.drawImage(g, ImageManager.SELECT_ARRANGE_ITEM_MENU_TOP, 5, 40);
+        for(int i=0;i<9;i++)
+            Function.drawImage(g, ImageManager.SELECT_ARRANGE_ITEM_MENU_MID, 5, 100+60*i);
+        Function.drawImage(g, ImageManager.SELECT_ARRANGE_ITEM_MENU_BOT, 5, 640);
+
+        super.paintLogs(g);
     }
 
     public MakeMapPanel(){
@@ -58,8 +79,24 @@ public class MakeMapPanel extends TrackablePanel {
 
             @Override
             public void mouseMoved(MouseEvent e) {
-
+                Point cur = Variables.mousePos;
+                mouseCoordX = (cur.x - cameraX)/ GRID_SIZE - COORDINATE_ADJUST_OFFSET_X;
+                mouseCoordY = -(cur.y - cameraY)/ GRID_SIZE + COORDINATE_ADJUST_OFFSET_Y;
             }
         });
+
+        new Thread(() -> {
+            while(true){
+                applyLogs(new String[]{
+                        "CameraPos "+ Function.getPairStr(cameraX, cameraY),
+                        "MouseCoord "+ Function.getPairStr(mouseCoordX, mouseCoordY),
+                });
+                try {
+                    Thread.sleep(1000/ Constant.FPS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

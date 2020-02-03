@@ -9,9 +9,9 @@ import Panels.MainPanel;
 import javax.swing.*;
 
 public class FrameManager {
-    public static MainFrame frame = new MainFrame();
+    public MainFrame frame = new MainFrame();
 
-    public static LogPanel logPanel = new LogPanel();
+    public LogPanel logPanel = new LogPanel();
 
     public FrameManager(){
         startDrawing();

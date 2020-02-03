@@ -1,4 +1,4 @@
-package Engine;
+package Managers;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -7,16 +7,22 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ImageEngine {
+public class ImageManager {
     public static final int BOUNCE_BALL_IMAGE = 1000;
     public static final int MAIN_MENU_BOX_IMAGE = 1001;
+    public static final int SELECT_ARRANGE_ITEM_MENU_TOP = 1002;
+    public static final int SELECT_ARRANGE_ITEM_MENU_MID = 1003;
+    public static final int SELECT_ARRANGE_ITEM_MENU_BOT = 1004;
 
     public static final int TILE_0 = 10000;
     private static HashMap<Integer, BufferedImage> imageBundle = new HashMap<>();
 
-    public ImageEngine(){
+    public ImageManager(){
         addImage(BOUNCE_BALL_IMAGE, "bounce_ball.png", 70);
         addImage(MAIN_MENU_BOX_IMAGE, "main_menu_bar.png", 400);
+        addImage(SELECT_ARRANGE_ITEM_MENU_TOP, "select_arrange_item_menu_top.png",60);
+        addImage(SELECT_ARRANGE_ITEM_MENU_MID, "select_arrange_item_menu_middle.png", 60);
+        addImage(SELECT_ARRANGE_ITEM_MENU_BOT, "select_arrange_item_menu_bottom.png", 60);
 
         addImage(TILE_0, "b0.png", 150);
     }

@@ -3,17 +3,13 @@ package Panels;
 import Drawables.BounceBallImage;
 import Drawables.SolidColorBackground;
 import Drawables.Tile;
-import Engine.ImageEngine;
+import Managers.ImageManager;
 import Global.Constant;
 import Global.Function;
-import Global.Variables;
 import Managers.FontManager;
 import ObjectUtil.*;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainPanel extends TrackablePanel {
     private Layer backgroundLayer = new Layer();
@@ -37,9 +33,9 @@ public class MainPanel extends TrackablePanel {
         bounceBallImage.setCollisionLayer(groundTileLayer);
         bounceBallLayer.add(bounceBallImage);
 
-        CButton playSingleButton = new CButton(0, 200, ImageEngine.MAIN_MENU_BOX_IMAGE, "Single Play");
-        CButton playMultiButton = new CButton(0, 320, ImageEngine.MAIN_MENU_BOX_IMAGE, "MultiPlay");
-        CButton makeCustomMapButton = new CButton(0, 440, ImageEngine.MAIN_MENU_BOX_IMAGE, "Map Editor");
+        CButton playSingleButton = new CButton(0, 200, ImageManager.MAIN_MENU_BOX_IMAGE, "Single Play");
+        CButton playMultiButton = new CButton(0, 320, ImageManager.MAIN_MENU_BOX_IMAGE, "MultiPlay");
+        CButton makeCustomMapButton = new CButton(0, 440, ImageManager.MAIN_MENU_BOX_IMAGE, "Map Editor");
         makeCustomMapButton.setClickListener(() -> Function.movePanel(new MakeMapPanel()));
 
         buttonLayer.add(playSingleButton);

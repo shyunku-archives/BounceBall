@@ -49,9 +49,13 @@ public class LogPanel extends JPanel {
         Graphics2D g = (Graphics2D)gd;
         FontManager.smoothRendering(g);
 
-        g.setColor(new Color(20, 70, 20));
+        g.setColor(Constant.LOG_TEXT_COLOR);
         for(int i=0;i<logs.length;i++){
             g.drawString(logs[i], 10, 15+20*i);
         }
+    }
+
+    public int getLogSize(){
+        return logs.length;
     }
 }

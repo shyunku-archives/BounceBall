@@ -33,11 +33,12 @@ public class MakeMapPanel extends TrackablePanel {
         Graphics2D g = (Graphics2D) gd;
         FontManager.smoothRendering(g);
 
-        g.setColor(new Color(202, 202, 202));
+        g.setColor(new Color(202, 70, 0, 87));
         //y-axis
         int yAxisCoord = COORDINATE_ADJUST_OFFSET_X*GRID_SIZE + cameraX;
         g.fillRect(yAxisCoord, 0, GRID_SIZE, Constant.RESOLUTION.height);
 
+        g.setColor(new Color(0, 115, 202, 87));
         //y-axis
         int xAxisCoord = COORDINATE_ADJUST_OFFSET_Y*GRID_SIZE + cameraY;
         g.fillRect(0, xAxisCoord, Constant.RESOLUTION.width, GRID_SIZE);
@@ -62,6 +63,17 @@ public class MakeMapPanel extends TrackablePanel {
             Function.drawImage(g, ImageManager.SELECT_ARRANGE_ITEM_MENU_MID, 5, 100+60*i);
         Function.drawImage(g, ImageManager.SELECT_ARRANGE_ITEM_MENU_BOT, 5, 640);
 
+        yAxisCoord = (mouseCoordX + COORDINATE_ADJUST_OFFSET_X)*GRID_SIZE + cameraX;
+        xAxisCoord = -(mouseCoordY - COORDINATE_ADJUST_OFFSET_Y)*GRID_SIZE + cameraY;
+
+
+        //mouse coordinate rect
+        g.setColor(new Color(167, 167, 167, 132));
+        g.fillRect(yAxisCoord+1, xAxisCoord+1, GRID_SIZE-1, GRID_SIZE-1);
+
+        Function.setFontSize(g, 10f);
+        g.drawString(String.format("%d,%d", mouseCoordX, mouseCoordY), yAxisCoord + GRID_SIZE + 5, xAxisCoord - 5);
+
         super.paintLogs(g);
     }
 
@@ -80,8 +92,8 @@ public class MakeMapPanel extends TrackablePanel {
             @Override
             public void mouseMoved(MouseEvent e) {
                 Point cur = Variables.mousePos;
-                mouseCoordX = (cur.x - cameraX)/ GRID_SIZE - COORDINATE_ADJUST_OFFSET_X;
-                mouseCoordY = -(cur.y - cameraY)/ GRID_SIZE + COORDINATE_ADJUST_OFFSET_Y;
+                mouseCoordX = (int) Math.floor((cur.x - cameraX)/ (double)GRID_SIZE) - COORDINATE_ADJUST_OFFSET_X;
+                mouseCoordY = -(int) Math.floor((cur.y - cameraY)/ (double)GRID_SIZE) + COORDINATE_ADJUST_OFFSET_Y;
             }
         });
 

@@ -3,7 +3,7 @@ package Global;
 import java.awt.*;
 
 public class Constant {
-    public static final String VERSION = "0.2.1v";
+    public static final String VERSION = "0.2.2v";
 
     //DISPLAY
     public static final Dimension RESOLUTION = new Dimension(1360, 765);
